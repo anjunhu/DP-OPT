@@ -1,8 +1,8 @@
 import numpy as np
 from collections import defaultdict
 from utils.dln_data import init_dataset
-from datasets import load_dataset, concatenate_datasets
-
+from datasets import DatasetDict, load_dataset, concatenate_datasets
+from typing import cast
 
 def sample_demos(dataset, num_demos, label_words, make_text_target=True,
                  return_subset=False, rng=np.random, input_key='sentence', 
@@ -110,6 +110,16 @@ def get_dataset(name, holdout_ratio, test_ratio=1., rng=np.random, adhoc_full_te
         raw_dataset['train'] = load_dataset(f"vita-group/{name}")['train']
         label_words = output_classes.protos
         data_splits = ['train', 'test']
+    elif name == "age-rating":
+        base_name = name.split('_')[0]
+        dln_ds, output_classes, val_examples = init_dataset(base_name, 42, "./data")
+        raw_dataset = dln_ds.get_hf_data()
+        label_words = output_classes.protos
+        data_splits = ['train', 'test']
+    elif name == 'income-residency':
+        pass
+    elif name == 'gender-category':
+        pass
     else:
         raise NotImplementedError(f"data: {name}")
 

@@ -162,7 +162,7 @@ cython_debug/
 wandb/
 results/
 checkpoint/
-data/
+#data/
 
 openai_config.py
 flagged

@@ -23,7 +23,8 @@ def config_args(parser: argparse.ArgumentParser):
                              "independently. This is similar to bwd but will use different demos for each iteration.;\n"
                              "Note to use iid_ibwd for dp")
     parser.add_argument('--seed', default=0, type=int, help='random seed')
-    parser.add_argument('--data', default='sst2', choices=['sst2', 'trec', 'disaster', 'mpqa'])
+    parser.add_argument('--data', default='age-rating', choices=['sst2', 'trec', 'disaster', 'mpqa',
+                                                           'income-residency', 'gender-category', 'age-rating'])
     parser.add_argument('--model', default='lmsys/vicuna-7b-v1.3', help="model for generating prompts.")
     parser.add_argument('--instruct_type', default='vicuna', type=str, help='instruction format.')
     parser.add_argument('--batch_size', default=8, type=int, help="batch size for evaluation")

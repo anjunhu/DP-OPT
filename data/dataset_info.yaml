@@ -43,6 +43,32 @@ subj:
   eval_template: "{{ input }}\nThe answer is "
   output_type: "single word"
 
+agnews:
+  # output space: ["1-World", "2-Sports", "3-Business", "4-Science/Tech"]
+  # raw data example: 
+  # Russia shrugs off US court freeze on oil giant Yukos auction. \"MOSCOW (AFP) - Russia forged ahead with the weekend auction of the core asset of crippled oil giant Yukos despite a disputed US court order barring the sale, with state-controlled gas giant Gazprom entering the bidding.
+  # 3
+  # Pope Prays for Beslan School Dead at Italy Mass. \"LORETO, Italy (Reuters) - Pope John Paul prayed for the  victims of the \"\"inhumane violence\"\" of Russia's Beslan school  tragedy as he said Mass on Sunday before 200,000 people in  central Italy.
+  # 1
+  label_mapping: {'1': 'world', '2': 'sports', '3': 'business', '4': 'technology'}
+  instruction: "Classify the news articles into the categories of World, Sports, Business, and Technology."
+  eval_example_template: "{{ input }}\nThe answer is {{ label }}\n"
+  eval_template: "{{ input }}\nThe answer is "
+  output_type: "single word"
+
+age-rating:
+  # output space: ["0.0", "1.0", "2.0, "3.0", "4.0", "5.0"]
+  # raw data example: 
+  # Greetings! I'm Michael Price, 20 years old from Riverside, Massachusetts. I picked up this product without any discount and I'm not a subscriber. Unfortunately, this product did not meet my expectations. I would not recommend it.
+  # 1
+  # Hi, I'm Richard Salazar, 50 years old from Riverside, Massachusetts. I picked up this product without any discount and I'm not a subscriber. The product is okay, but there is room for improvement. It does its job but could be better.
+  # 3
+  label_mapping: {'0': '0.0', '1': '1,0', '2': '2.0', '3': '3.0','4': '4.0', '5': '5.0'}
+  instruction: "Based on the product review, predict the product rating out of 5."
+  eval_example_template: "{{ input }}\nThe rating is {{ label }}\n"
+  eval_template: "{{ input }}\nThe rating is "
+  output_type: "single word"
+
 ###
 # From Big Bench Hard
 # https://arxiv.org/abs/2210.09261

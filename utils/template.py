@@ -171,6 +171,47 @@ class TrecEvalTemplate(EvalTemplate):
         return cls("[INPUT]  It was about [OUTPUT]")
 
 
+class AgeRatingEvalTemplate(EvalTemplate):
+    init_instruct = "Based on the product review, predict the product rating out of 5."
+    input_key = 'sentence'
+
+    def verbalize(self, prompt, full_demo, input_dict):
+        input = input_dict[self.input_key]
+        output = input_dict['label_word']
+        return self.fill(prompt, full_demo, input, output).rstrip()
+    
+    @classmethod
+    def get_zeroshot_template(cls):
+        return cls("[INPUT]  The rating is [OUTPUT]")
+    
+class GenderCategoryEvalTemplate(EvalTemplate):
+    init_instruct = "Based on one's profile, predict their preferred product category."
+    input_key = 'sentence'
+
+    def verbalize(self, prompt, full_demo, input_dict):
+        input = input_dict[self.input_key]
+        output = input_dict['label_word']
+        return self.fill(prompt, full_demo, input, output).rstrip()
+    
+    @classmethod
+    def get_zeroshot_template(cls):
+        return cls("[INPUT]  Their preferred product category is [OUTPUT]")
+    
+
+class IncomeResidencyEvalTemplate(EvalTemplate):
+    init_instruct = "Based on one's profile, predict their state of residency."
+    input_key = 'sentence'
+
+    def verbalize(self, prompt, full_demo, input_dict):
+        input = input_dict[self.input_key]
+        output = input_dict['label_word']
+        return self.fill(prompt, full_demo, input, output).rstrip()
+    
+    @classmethod
+    def get_zeroshot_template(cls):
+        return cls("[INPUT]  They live in [OUTPUT]")
+    
+
 class MpqaEvalTemplate(EvalTemplate):
     init_instruct = "Read the following review, then choose whether it is negative or positive."
     input_key = 'sentence'
@@ -210,6 +251,12 @@ def get_template_class(data_name):
         temp_class = MpqaEvalTemplate
     elif data_name in ['disaster', 'disaster_priv']:
         temp_class = DisasterEvalTemplate
+    elif 'age-rating' in data_name:
+        temp_class = AgeRatingEvalTemplate
+    elif 'gender-category' in data_name:
+        temp_class = GenderCategoryEvalTemplate
+    elif 'income-residency' in data_name:
+        temp_class = IncomeResidencyEvalTemplate
     else:
         raise NotImplementedError(f"Unknown data: {data_name}")
     return temp_class

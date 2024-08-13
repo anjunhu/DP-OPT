@@ -23,7 +23,7 @@ Prepare conda env.
 conda create --name dp-opt python=3.8 -y
 conda activate dp-opt
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-pip install transformers datasets accelerate sentencepiece scikit-learn wandb autodp
+pip install transformers==4.28.1 datasets accelerate sentencepiece scikit-learn wandb autodp
 # transformers==4.28.1
 ```
 

@@ -157,12 +157,12 @@ class Dataset:
                     self.dataset["test"]["label"].append(target)
 
         elif "ordered_prompt" in self.data_path:
-            assert self.dataset_name in ("mpqa", "trec", "subj"), self.dataset_name
+            # assert self.dataset_name in ("mpqa", "trec", "subj"), self.dataset_name
 
             for split in ["train", "dev", "test"]:
                 _split = "dev_subsample" if split == "dev" else split
                 file_path = os.path.join(
-                    self.data_path, self.dataset_name, _split + ".jsonl"
+                    self.data_path, "data", self.dataset_name, _split + ".jsonl"
                 )
                 sentence_list, label_list = [], []
 
@@ -359,6 +359,10 @@ def init_dataset(dataset_id, seed, data_dir, append_options=False, n_test=None):
         "subj": ordered_prompt,
         "mpqa": ordered_prompt,
         "trec": ordered_prompt,
+        "agnews": ordered_prompt,
+        "age-rating": ordered_prompt,
+        "gender-category": ordered_prompt,
+        "income-residency": ordered_prompt,
         "disaster": leopard,
         "airline": leopard,
         "hyperbaton": bbh,
